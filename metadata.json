@@ -1,0 +1,7 @@
+{
+  "name": "Buenos Aires Romantic Guide",
+  "description": "A curated tour guide of Buenos Aires parks and plazas, featuring commute planning, curated playlists, and a digital memory scrapbook.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
