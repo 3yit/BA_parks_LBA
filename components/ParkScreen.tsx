@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
 import { Park, Photo } from '../types';
-import { Camera, MapPin, Clock, Info, ChevronLeft, ArrowRight, Share2, ExternalLink, Music, BookOpen, Podcast } from 'lucide-react';
+import { Camera, MapPin, Clock, Info, ChevronLeft, ArrowRight, Share2, ExternalLink, Music, BookOpen, Podcast, X } from 'lucide-react';
 import { BarChart, Bar, XAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 import PhotoGallery from './PhotoGallery';
+
+interface EmbeddedContent {
+  title: string;
+  link: string;
+  type: 'article' | 'podcast';
+}
 
 interface ParkScreenProps {
   park: Park;
@@ -29,6 +35,7 @@ const ParkScreen: React.FC<ParkScreenProps> = ({
   park, stopNumber, totalStops, photos, onAddPhoto, onNext, onPrev, hasPrev, hasNext 
 }) => {
   const [showGallery, setShowGallery] = useState(false);
+  const [embeddedContent, setEmbeddedContent] = useState<EmbeddedContent | null>(null);
   const placeholderImage = `https://picsum.photos/seed/${park.id}/800/600`;
 
   // Construct Google Maps Search Query
@@ -180,7 +187,14 @@ const ParkScreen: React.FC<ParkScreenProps> = ({
             <div className="space-y-3 pt-2">
                 <h4 className="text-xs font-bold text-stone-400 uppercase tracking-widest">While You're Here</h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <a href={park.commute_content.book.link} target="_blank" rel="noreferrer" className="flex items-center gap-3 p-3 rounded-xl bg-amber-50 hover:bg-amber-100 transition-colors border border-amber-100">
+                    <button 
+                        onClick={() => setEmbeddedContent({ 
+                            title: park.commute_content.book.title, 
+                            link: park.commute_content.book.link, 
+                            type: 'article' 
+                        })}
+                        className="flex items-center gap-3 p-3 rounded-xl bg-amber-50 hover:bg-amber-100 transition-colors border border-amber-100 text-left"
+                    >
                         <div className="bg-amber-200 p-2 rounded-full text-amber-700">
                             <BookOpen className="w-4 h-4" />
                         </div>
@@ -188,9 +202,16 @@ const ParkScreen: React.FC<ParkScreenProps> = ({
                             <p className="text-[10px] text-amber-600 font-bold uppercase">Read</p>
                             <p className="text-stone-800 text-sm font-medium truncate">{park.commute_content.book.title}</p>
                         </div>
-                    </a>
+                    </button>
                     
-                    <a href={park.commute_content.podcast.link} target="_blank" rel="noreferrer" className="flex items-center gap-3 p-3 rounded-xl bg-purple-50 hover:bg-purple-100 transition-colors border border-purple-100">
+                    <button 
+                        onClick={() => setEmbeddedContent({ 
+                            title: park.commute_content.podcast.title, 
+                            link: park.commute_content.podcast.link, 
+                            type: 'podcast' 
+                        })}
+                        className="flex items-center gap-3 p-3 rounded-xl bg-purple-50 hover:bg-purple-100 transition-colors border border-purple-100 text-left"
+                    >
                         <div className="bg-purple-200 p-2 rounded-full text-purple-700">
                             <Podcast className="w-4 h-4" />
                         </div>
@@ -198,7 +219,7 @@ const ParkScreen: React.FC<ParkScreenProps> = ({
                             <p className="text-[10px] text-purple-600 font-bold uppercase">Listen</p>
                             <p className="text-stone-800 text-sm font-medium truncate">{park.commute_content.podcast.title}</p>
                         </div>
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>
@@ -268,6 +289,51 @@ const ParkScreen: React.FC<ParkScreenProps> = ({
             onClose={() => setShowGallery(false)} 
             onAddPhoto={onAddPhoto}
         />
+      )}
+
+      {/* Embedded Content Modal */}
+      {embeddedContent && (
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl w-full max-w-4xl h-[85vh] flex flex-col overflow-hidden shadow-2xl">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between p-4 border-b border-stone-200 bg-stone-50">
+              <div className="flex items-center gap-3 flex-1 min-w-0">
+                <div className={`p-2 rounded-full ${embeddedContent.type === 'article' ? 'bg-amber-100 text-amber-700' : 'bg-purple-100 text-purple-700'}`}>
+                  {embeddedContent.type === 'article' ? <BookOpen className="w-4 h-4" /> : <Podcast className="w-4 h-4" />}
+                </div>
+                <h3 className="font-semibold text-stone-800 truncate">{embeddedContent.title}</h3>
+              </div>
+              <div className="flex items-center gap-2">
+                <a 
+                  href={embeddedContent.link} 
+                  target="_blank" 
+                  rel="noreferrer"
+                  className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-stone-600 hover:text-stone-800 hover:bg-stone-100 rounded-lg transition-colors"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                  Open in new tab
+                </a>
+                <button 
+                  onClick={() => setEmbeddedContent(null)}
+                  className="p-2 hover:bg-stone-200 rounded-full transition-colors"
+                >
+                  <X className="w-5 h-5 text-stone-600" />
+                </button>
+              </div>
+            </div>
+            
+            {/* Iframe Container */}
+            <div className="flex-1 bg-stone-100">
+              <iframe
+                src={embeddedContent.link}
+                className="w-full h-full border-0"
+                title={embeddedContent.title}
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+              />
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
