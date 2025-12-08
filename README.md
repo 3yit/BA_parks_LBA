@@ -1,6 +1,8 @@
 # BA Parks LBA
 
-A React + TypeScript application for exploring Bay Area parks.
+A React + TypeScript application for exploring Buenos Aires parks.
+
+Add songs to the spotify: https://open.spotify.com/playlist/647rKRiACqIdtxA1pBOWDj?si=d019MBr3TX28RbOUdlwTZw
 
 ## Run Locally
 
