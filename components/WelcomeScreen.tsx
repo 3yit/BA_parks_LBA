@@ -47,7 +47,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart, guestNotes = [] 
               <span className="group-hover:translate-x-1 transition-transform">→</span>
             </button>
             <p className="text-xs text-stone-400 mt-4 font-medium uppercase tracking-widest">
-              Designed by Team Rim, Mara and Jonathon
+              Designed by: Rim, Mara and Jonathan for a CS164 assignement.
             </p>
           </div>
         </div>
