@@ -24,10 +24,10 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart, guestNotes = [] 
           </div>
           <h1 className="text-5xl md:text-6xl font-serif font-bold text-stone-800 tracking-tight leading-tight">
             Buenos Aires<br />
-            <span className="text-rose-500 italic">Romantic Guide</span>
+            <span className="text-rose-500 italic">Park Guide</span>
           </h1>
           <p className="text-xl text-stone-600 font-light">
-            A perfect day out curated for two.
+            By Minervans, for Minervans.
           </p>
         </div>
 
@@ -47,7 +47,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart, guestNotes = [] 
               <span className="group-hover:translate-x-1 transition-transform">→</span>
             </button>
             <p className="text-xs text-stone-400 mt-4 font-medium uppercase tracking-widest">
-              Designed by Team 3
+              Designed by Team Rim, Mara and Jonathon
             </p>
           </div>
         </div>
