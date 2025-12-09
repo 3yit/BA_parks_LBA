@@ -14,7 +14,7 @@ const TOUR_STOPS = [
   { name: "El Rosedal Garden", link: "https://en.wikipedia.org/wiki/El_Rosedal" },
   { name: "Parque Centenario", link: "https://en.wikipedia.org/wiki/Parque_Centenario" },
   { name: "Los Andes Park", link: "https://maps.app.goo.gl/Vp8FzXmcRqJ2YwKD8" },
-  { name: "Plaza Mafalda", link: "https://maps.app.goo.gl/wEQ8MYJJ5CJvz2B66" },
+  { name: "Plaza Mafalda", link: "https://www.google.com/maps/place/Plaza+Mafalda/@-34.5741,-58.4497,17z" },
   { name: "Plaza Dr. Bernardo Houssay", link: "https://maps.app.goo.gl/NrKV5v9Y1mjJxKcx6" },
   { name: "Plaza Rodríguez Peña", link: "https://maps.app.goo.gl/7oZvqUQ9kQJ8eT3y9" },
   { name: "Plaza Libertad", link: "https://maps.app.goo.gl/G4qYpQvUJrLqAh7y9" }
