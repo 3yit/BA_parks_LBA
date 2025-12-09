@@ -5,6 +5,9 @@ import WelcomeScreen from './components/WelcomeScreen';
 import CommuteScreen from './components/CommuteScreen';
 import ParkScreen from './components/ParkScreen';
 import CompletionScreen from './components/CompletionScreen';
+import { db, storage } from './firebase';
+import { collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } from 'firebase/firestore';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 type ViewState = 'WELCOME' | 'COMMUTE' | 'PARK' | 'COMPLETION';
 
@@ -30,6 +33,51 @@ function App() {
   const nextPark = nextParkId !== null ? PARKS.find(p => p.id === nextParkId) : null;
 
   const commuteInfo = nextPark ? getCommuteInfo(currentParkId, nextParkId!) : { time: 0, method: 'Walk' as const };
+
+  // Load photos from Firebase
+  useEffect(() => {
+    const q = query(collection(db, 'photos'));
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const loadedPhotos: Photo[] = [];
+      snapshot.forEach((doc) => {
+        const data = doc.data();
+        loadedPhotos.push({
+          id: doc.id as any,
+          url: data.url,
+          photographer: data.photographer,
+          timestamp: data.timestamp?.toDate?.()?.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) || data.timestampString,
+          parkId: data.parkId,
+          parkName: data.parkName
+        });
+      });
+      setPhotos(loadedPhotos);
+    }, (error) => {
+      console.error('Error loading photos:', error);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  // Load guest notes from Firebase
+  useEffect(() => {
+    const q = query(collection(db, 'guestNotes'));
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const loadedNotes: GuestNote[] = [];
+      snapshot.forEach((doc) => {
+        const data = doc.data();
+        loadedNotes.push({
+          id: doc.id as any,
+          text: data.text,
+          author: data.author,
+          rating: data.rating,
+          timestamp: data.timestamp?.toDate?.()?.toLocaleDateString() || data.timestampString
+        });
+      });
+      setGuestNotes(loadedNotes);
+    }, (error) => {
+      console.error('Error loading guest notes:', error);
+    });
+    return () => unsubscribe();
+  }, []);
 
   useEffect(() => {
     if (view !== 'WELCOME' && navigator.geolocation) {
@@ -65,36 +113,46 @@ function App() {
     }
   };
 
-  const handleAddPhoto = (file: File, name: string) => {
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      const newPhoto: Photo = {
-        id: Date.now(),
-        url: reader.result as string,
+  const handleAddPhoto = async (file: File, name: string) => {
+    try {
+      // Upload image to Firebase Storage
+      const timestamp = Date.now();
+      const storageRef = ref(storage, `photos/${timestamp}_${file.name}`);
+      await uploadBytes(storageRef, file);
+      const downloadURL = await getDownloadURL(storageRef);
+
+      // Save photo metadata to Firestore
+      await addDoc(collection(db, 'photos'), {
+        url: downloadURL,
         photographer: name,
-        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        timestamp: serverTimestamp(),
+        timestampString: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         parkId: currentParkId,
         parkName: currentPark.name
-      };
-      setPhotos(prev => [newPhoto, ...prev]);
-    };
-    reader.readAsDataURL(file);
+      });
+    } catch (error) {
+      console.error('Error uploading photo:', error);
+      alert('Failed to upload photo. Please try again.');
+    }
   };
 
-  const handleFinishTour = (note: string, author: string, rating: number) => {
+  const handleFinishTour = async (note: string, author: string, rating: number) => {
     if (note.trim()) {
-      const newNote: GuestNote = {
-        id: Date.now(),
-        text: note,
-        author: author || 'Anonymous Traveler',
-        rating: rating,
-        timestamp: new Date().toLocaleDateString()
-      };
-      setGuestNotes(prev => [newNote, ...prev]);
+      try {
+        // Save guest note to Firestore
+        await addDoc(collection(db, 'guestNotes'), {
+          text: note,
+          author: author || 'Anonymous Traveler',
+          rating: rating,
+          timestamp: serverTimestamp(),
+          timestampString: new Date().toLocaleDateString()
+        });
+      } catch (error) {
+        console.error('Error saving guest note:', error);
+      }
     }
     // Reset tour state for the next visitor
     setCurrentStopIndex(0);
-    setPhotos([]); // Optional: clear photos for privacy between sessions
     setView('WELCOME');
   };
 

@@ -43,7 +43,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart, guestNotes = [] 
               onClick={onStart}
               className="w-full bg-stone-900 text-white font-medium text-lg px-8 py-4 rounded-xl shadow-xl hover:bg-stone-800 hover:scale-[1.02] transition-all duration-300 flex items-center justify-center gap-2 group"
             >
-              Begin Adventure
+              LESGO
               <span className="group-hover:translate-x-1 transition-transform">→</span>
             </button>
             <p className="text-xs text-stone-400 mt-4 font-medium uppercase tracking-widest">
