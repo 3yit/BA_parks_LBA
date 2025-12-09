@@ -72,7 +72,21 @@ const ParkScreen: React.FC<ParkScreenProps> = ({
             <span className="text-xs font-bold tracking-widest bg-black/20 backdrop-blur-md px-3 py-1 rounded-full border border-white/20">
                 STOP {stopNumber} / {totalStops}
             </span>
-            <button className="p-2 rounded-full bg-black/20 backdrop-blur-md hover:bg-black/40">
+            <button 
+                onClick={() => {
+                    if (navigator.share) {
+                        navigator.share({
+                            title: 'Buenos Aires Park Guide',
+                            text: 'Check out this awesome BA parks tour guide!',
+                            url: 'https://ba-parks-lba.vercel.app'
+                        });
+                    } else {
+                        navigator.clipboard.writeText('https://ba-parks-lba.vercel.app');
+                        alert('Link copied to clipboard!');
+                    }
+                }}
+                className="p-2 rounded-full bg-black/20 backdrop-blur-md hover:bg-black/40"
+            >
                 <Share2 className="w-5 h-5" />
             </button>
         </div>
