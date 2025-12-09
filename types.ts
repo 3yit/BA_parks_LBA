@@ -25,13 +25,22 @@ export interface CommuteInfo {
   method: 'Walk' | 'Bus' | 'Metro' | 'Bus + Walk' | 'Transit';
 }
 
+export interface PhotoComment {
+  id: string;
+  author: string;
+  text: string;
+  timestamp: string;
+}
+
 export interface Photo {
-  id: number;
+  id: number | string;
   url: string;
   photographer: string;
+  caption?: string;
   timestamp: string;
   parkId: number;
   parkName: string;
+  comments?: PhotoComment[];
 }
 
 export interface UserLocation {

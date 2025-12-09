@@ -15,7 +15,8 @@ interface ParkScreenProps {
   stopNumber: number;
   totalStops: number;
   photos: Photo[];
-  onAddPhoto: (file: File, name: string) => void;
+  onAddPhoto: (file: File, name: string, caption: string) => void;
+  onAddComment: (photoId: string | number, author: string, text: string) => void;
   onNext: () => void;
   onPrev: () => void;
   hasPrev: boolean;
@@ -32,7 +33,7 @@ const CHART_DATA = [
 ];
 
 const ParkScreen: React.FC<ParkScreenProps> = ({ 
-  park, stopNumber, totalStops, photos, onAddPhoto, onNext, onPrev, hasPrev, hasNext 
+  park, stopNumber, totalStops, photos, onAddPhoto, onAddComment, onNext, onPrev, hasPrev, hasNext 
 }) => {
   const [showGallery, setShowGallery] = useState(false);
   const [embeddedContent, setEmbeddedContent] = useState<EmbeddedContent | null>(null);
@@ -288,6 +289,7 @@ const ParkScreen: React.FC<ParkScreenProps> = ({
             photos={photos} 
             onClose={() => setShowGallery(false)} 
             onAddPhoto={onAddPhoto}
+            onAddComment={onAddComment}
         />
       )}
 

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { PARKS, TOUR_ORDER, getCommuteInfo } from './constants';
-import { Photo, UserLocation } from './types';
+import { Photo, UserLocation, PhotoComment } from './types';
 import WelcomeScreen from './components/WelcomeScreen';
 import CommuteScreen from './components/CommuteScreen';
 import ParkScreen from './components/ParkScreen';
 import CompletionScreen from './components/CompletionScreen';
 import { db, storage } from './firebase';
-import { collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } from 'firebase/firestore';
+import { collection, addDoc, query, onSnapshot, serverTimestamp, doc, updateDoc, arrayUnion } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 type ViewState = 'WELCOME' | 'COMMUTE' | 'PARK' | 'COMPLETION';
@@ -45,9 +45,11 @@ function App() {
           id: doc.id as any,
           url: data.url,
           photographer: data.photographer,
+          caption: data.caption || '',
           timestamp: data.timestamp?.toDate?.()?.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) || data.timestampString,
           parkId: data.parkId,
-          parkName: data.parkName
+          parkName: data.parkName,
+          comments: data.comments || []
         });
       });
       setPhotos(loadedPhotos);
@@ -113,7 +115,7 @@ function App() {
     }
   };
 
-  const handleAddPhoto = async (file: File, name: string) => {
+  const handleAddPhoto = async (file: File, name: string, caption: string) => {
     try {
       // Upload image to Firebase Storage
       const timestamp = Date.now();
@@ -125,14 +127,34 @@ function App() {
       await addDoc(collection(db, 'photos'), {
         url: downloadURL,
         photographer: name,
+        caption: caption,
         timestamp: serverTimestamp(),
         timestampString: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         parkId: currentParkId,
-        parkName: currentPark.name
+        parkName: currentPark.name,
+        comments: []
       });
     } catch (error) {
       console.error('Error uploading photo:', error);
       alert('Failed to upload photo. Please try again.');
+    }
+  };
+
+  const handleAddComment = async (photoId: string | number, author: string, text: string) => {
+    try {
+      const photoRef = doc(db, 'photos', String(photoId));
+      const newComment: PhotoComment = {
+        id: Date.now().toString(),
+        author,
+        text,
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      };
+      await updateDoc(photoRef, {
+        comments: arrayUnion(newComment)
+      });
+    } catch (error) {
+      console.error('Error adding comment:', error);
+      alert('Failed to add comment. Please try again.');
     }
   };
 
@@ -182,6 +204,7 @@ function App() {
       totalStops={TOUR_ORDER.length}
       photos={photos.filter(p => p.parkId === currentParkId)}
       onAddPhoto={handleAddPhoto}
+      onAddComment={handleAddComment}
       onNext={handleNext}
       onPrev={handlePrev}
       hasPrev={currentStopIndex > 0}
