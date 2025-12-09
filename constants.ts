@@ -1,6 +1,17 @@
 import { Park, CommuteInfo } from './types';
 
-export const TOUR_ORDER = [2, 9, 0, 6, 7, 8, 1, 3, 5, 4];
+// Tour order:
+// 1: Plaza General San Martín (id 2)
+// 2: Floralis Genérica / Free Plaza del Sud (id 3)
+// 3: Plaza Rep. Fed. del Brasil (id 5)
+// 4: El Rosedal Garden (id 1)
+// 5: Parque Centenario (id 6)
+// 6: Los Andes Park (id 7)
+// 7: Plaza Mafalda (id 8)
+// 8: Plaza Dr. Bernardo Houssay (id 0)
+// 9: Plaza Rodríguez Peña (id 4)
+// 10: Plaza Libertad (id 9)
+export const TOUR_ORDER = [2, 3, 5, 1, 6, 7, 8, 0, 4, 9];
 
 export const PARKS: Park[] = [
   { id: 0, name: 'Plaza Dr. Bernardo Houssay', neighborhood: 'San Nicolás', lat: -34.5945, lon: -58.3817,
