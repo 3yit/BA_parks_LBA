@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flower, Route, MessageCircleHeart } from 'lucide-react';
+import { Flower, Clock, MapPin, MessageCircleHeart } from 'lucide-react';
 import { GuestNote } from '../App';
 
 interface WelcomeScreenProps {
@@ -8,16 +8,16 @@ interface WelcomeScreenProps {
 }
 
 const TOUR_STOPS = [
-  "Plaza General San Martín",
-  "Floralis Genérica",
-  "Plaza Rep. Fed. del Brasil",
-  "El Rosedal Garden",
-  "Parque Centenario",
-  "Los Andes Park",
-  "Plaza Mafalda",
-  "Plaza Dr. Bernardo Houssay",
-  "Plaza Rodríguez Peña",
-  "Plaza Libertad"
+  { name: "Plaza General San Martín", link: "https://maps.app.goo.gl/QJFqMz6qMDzVz6DM8" },
+  { name: "Floralis Genérica", link: "https://en.wikipedia.org/wiki/Floralis_Gen%C3%A9rica" },
+  { name: "Plaza Rep. Fed. del Brasil", link: "https://maps.app.goo.gl/9mGQzKv3Ax4Z6vJF8" },
+  { name: "El Rosedal Garden", link: "https://en.wikipedia.org/wiki/El_Rosedal" },
+  { name: "Parque Centenario", link: "https://en.wikipedia.org/wiki/Parque_Centenario" },
+  { name: "Los Andes Park", link: "https://maps.app.goo.gl/Vp8FzXmcRqJ2YwKD8" },
+  { name: "Plaza Mafalda", link: "https://maps.app.goo.gl/wEQ8MYJJ5CJvz2B66" },
+  { name: "Plaza Dr. Bernardo Houssay", link: "https://maps.app.goo.gl/NrKV5v9Y1mjJxKcx6" },
+  { name: "Plaza Rodríguez Peña", link: "https://maps.app.goo.gl/7oZvqUQ9kQJ8eT3y9" },
+  { name: "Plaza Libertad", link: "https://maps.app.goo.gl/G4qYpQvUJrLqAh7y9" }
 ];
 
 const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart, guestNotes = [] }) => {
@@ -45,13 +45,17 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart, guestNotes = [] 
         </div>
 
         <div className="glass-panel rounded-3xl p-8 shadow-xl border border-white/50 space-y-6">
-          {/* TSP Tour Order */}
+          {/* Tour Order */}
           <div className="text-left space-y-3">
-            <div className="flex items-center gap-2 justify-center mb-4">
-              <Route className="w-5 h-5 text-rose-500" />
+            <div className="flex items-center gap-2 justify-center mb-2">
+              <MapPin className="w-5 h-5 text-rose-500" />
               <h3 className="font-serif font-bold text-stone-700 text-sm">
-                Optimal Tour Order (TSP Formulation)
+                Our Curated Park Tour
               </h3>
+            </div>
+            <div className="flex items-center justify-center gap-1 text-stone-500 text-xs mb-4">
+              <Clock className="w-3.5 h-3.5" />
+              <span>Estimated duration: ~180 minutes</span>
             </div>
             <ol className="space-y-1.5">
               {TOUR_STOPS.map((stop, index) => (
@@ -59,7 +63,14 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart, guestNotes = [] 
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-rose-100 text-rose-600 font-bold text-xs flex items-center justify-center">
                     {index + 1}
                   </span>
-                  <span className="text-stone-600">{stop}</span>
+                  <a 
+                    href={stop.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-stone-600 hover:text-rose-500 hover:underline transition-colors"
+                  >
+                    {stop.name}
+                  </a>
                 </li>
               ))}
             </ol>
