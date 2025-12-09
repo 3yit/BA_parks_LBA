@@ -173,7 +173,7 @@ const ParkScreen: React.FC<ParkScreenProps> = ({
         <div className="bg-white rounded-3xl shadow-lg p-6 space-y-6">
             <h3 className="font-bold text-stone-800 flex items-center gap-2 text-lg">
                 <Music className="w-5 h-5 text-rose-500" />
-                Vibes & Knowledge
+                Vibes & Recommendations
             </h3>
 
             {/* Spotify Player */}
