@@ -8,16 +8,16 @@ interface WelcomeScreenProps {
 }
 
 const TOUR_STOPS = [
-  { name: "Plaza General San Martín", link: "https://www.google.com/maps/place/Plaza+Gral.+San+Mart%C3%ADn/@-34.5905,-58.3729,17z" },
-  { name: "Floralis Genérica", link: "https://www.google.com/maps/place/Floralis+Gen%C3%A9rica/@-34.5858,-58.3934,17z" },
-  { name: "Plaza Rep. Fed. del Brasil", link: "https://www.google.com/maps/place/Plaza+Rep%C3%BAblica+Federativa+del+Brasil/@-34.5843,-58.3975,17z" },
-  { name: "El Rosedal Garden", link: "https://www.google.com/maps/place/El+Rosedal/@-34.5808,-58.4349,17z" },
-  { name: "Parque Centenario", link: "https://www.google.com/maps/place/Parque+Centenario/@-34.6019,-58.4128,17z" },
-  { name: "Los Andes Park", link: "https://www.google.com/maps/place/Parque+Los+Andes/@-34.5757,-58.4421,17z" },
-  { name: "Plaza Mafalda", link: "https://www.google.com/maps/place/Plaza+Mafalda/@-34.5667,-58.4555,17z" },
-  { name: "Plaza Dr. Bernardo Houssay", link: "https://www.google.com/maps/place/Plaza+Houssay/@-34.5945,-58.3817,17z" },
-  { name: "Plaza Rodríguez Peña", link: "https://www.google.com/maps/place/Plaza+Rodr%C3%ADguez+Pe%C3%B1a/@-34.5884,-58.3948,17z" },
-  { name: "Plaza Libertad", link: "https://www.google.com/maps/place/Plaza+Libertad/@-34.5918,-58.3689,17z" }
+  { name: "Plaza General San Martín", link: "https://www.google.com/maps/place/Plaza+Gral.+San+Mart%C3%ADn/@-34.5905,-58.3729,17z/data=!3m1!4b1!4m6!3m5!1s0x95bcca9c1c0a8e9d:0x8a0c8e8a0d9a0a0a!8m2!3d-34.5905!4d-58.3729!16s%2Fm%2F03qjx6y" },
+  { name: "Floralis Genérica", link: "https://www.google.com/maps/place/Floralis+Gen%C3%A9rica/@-34.5833855,-58.3959756,17z/data=!3m1!4b1!4m6!3m5!1s0x95bcca90be059813:0x7a0f9b6dd18f1f47!8m2!3d-34.5833899!4d-58.3934007!16s%2Fm%2F0gxqs2g" },
+  { name: "Plaza Rep. Fed. del Brasil", link: "https://www.google.com/maps/place/Plaza+Rep%C3%BAblica+Federativa+del+Brasil/@-34.5843,-58.3975,17z/data=!3m1!4b1!4m6!3m5!1s0x95bcca8fb5555555:0x5555555555555555!8m2!3d-34.5843!4d-58.3975" },
+  { name: "El Rosedal Garden", link: "https://www.google.com/maps/place/El+Rosedal+de+Palermo/@-34.5714848,-58.4326894,17z/data=!3m1!4b1!4m6!3m5!1s0x95bcb576dba979c5:0x7d5d5c5c5c5c5c5c!8m2!3d-34.5714892!4d-58.4301145!16s%2Fm%2F03qjx7b" },
+  { name: "Parque Centenario", link: "https://www.google.com/maps/place/Parque+Centenario/@-34.6064485,-58.4374384,17z/data=!3m1!4b1!4m6!3m5!1s0x95bccac87c1ba619:0x151a03c7f2f3a79!8m2!3d-34.6064529!4d-58.4348635!16s%2Fm%2F047jhv5" },
+  { name: "Los Andes Park", link: "https://www.google.com/maps/place/Parque+Los+Andes/@-34.5888831,-58.4552098,17z/data=!3m1!4b1!4m6!3m5!1s0x95bcb5e7f81b2eb1:0x9f05d6b4d0b5b5b5!8m2!3d-34.5888875!4d-58.4526349!16s%2Fg%2F1tdfp04m" },
+  { name: "Plaza Mafalda", link: "https://www.google.com/maps/place/Plaza+Mafalda/@-34.5806395,-58.4481864,17z/data=!3m1!4b1!4m6!3m5!1s0x95bcb5ebf9363d9f:0xa431bedea4c4a7d1!8m2!3d-34.5806439!4d-58.4456115!16s%2Fg%2F1q6m1zg15" },
+  { name: "Plaza Dr. Bernardo Houssay", link: "https://www.google.com/maps/place/Plaza+Houssay/@-34.5996515,-58.3989927,17z/data=!3m1!4b1!4m6!3m5!1s0x95bcca84b4333333:0x3333333333333333!8m2!3d-34.5996559!4d-58.3964178!16s%2Fg%2F1q5bm1234" },
+  { name: "Plaza Rodríguez Peña", link: "https://www.google.com/maps/place/Plaza+Rodr%C3%ADguez+Pe%C3%B1a/@-34.5988449,-58.3954178,17z/data=!3m1!4b1!4m6!3m5!1s0x95bcca8fb5555555:0x5555555555555555!8m2!3d-34.5988493!4d-58.3928429" },
+  { name: "Plaza Libertad", link: "https://www.google.com/maps/place/Plaza+Libertad/@-34.5961282,-58.3835556,17z/data=!3m1!4b1!4m6!3m5!1s0x95bcca9c1c0a8e9d:0x8a0c8e8a0d9a0a0a!8m2!3d-34.5961326!4d-58.3809807" }
 ];
 
 const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart, guestNotes = [] }) => {
