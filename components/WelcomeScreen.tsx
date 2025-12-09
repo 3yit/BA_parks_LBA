@@ -97,8 +97,8 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart, guestNotes = [] 
               <MessageCircleHeart className="w-5 h-5 text-rose-400" />
               Notes from Previous Visitors
             </h3>
-            <div className="space-y-3">
-              {guestNotes.slice(0, 3).map((note) => (
+            <div className="space-y-3 max-h-96 overflow-y-auto">
+              {guestNotes.map((note) => (
                 <div key={note.id} className="bg-white/60 backdrop-blur-sm p-4 rounded-2xl border border-white shadow-sm text-sm">
                   <p className="text-stone-700 italic mb-2">"{note.text}"</p>
                   <p className="text-rose-500 text-xs font-bold text-right">- {note.author}, {note.timestamp}</p>
