@@ -84,7 +84,15 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart, guestNotes = [] 
               LESGO
               <span className="group-hover:translate-x-1 transition-transform">→</span>
             </button>
-            <p className="text-xs text-stone-400 mt-4 font-medium uppercase tracking-widest">
+            <a 
+              href="https://www.canva.com/design/DAG7C89-TZw/umuvxMDwKZt8Q_8mRQQqqg/edit" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="block text-xs text-rose-500 mt-4 font-medium hover:underline"
+            >
+              🙏 Please prof give us a 5
+            </a>
+            <p className="text-xs text-stone-400 mt-2 font-medium uppercase tracking-widest">
               Designed by: Rim, Mara and Jonathan for a CS164 assignment.
             </p>
           </div>
