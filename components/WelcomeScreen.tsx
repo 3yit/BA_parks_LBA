@@ -8,16 +8,16 @@ interface WelcomeScreenProps {
 }
 
 const TOUR_STOPS = [
-  { name: "Plaza General San Martín", link: "https://maps.app.goo.gl/QJFqMz6qMDzVz6DM8" },
-  { name: "Floralis Genérica", link: "https://en.wikipedia.org/wiki/Floralis_Gen%C3%A9rica" },
-  { name: "Plaza Rep. Fed. del Brasil", link: "https://maps.app.goo.gl/9mGQzKv3Ax4Z6vJF8" },
-  { name: "El Rosedal Garden", link: "https://en.wikipedia.org/wiki/El_Rosedal" },
-  { name: "Parque Centenario", link: "https://en.wikipedia.org/wiki/Parque_Centenario" },
-  { name: "Los Andes Park", link: "https://maps.app.goo.gl/Vp8FzXmcRqJ2YwKD8" },
-  { name: "Plaza Mafalda", link: "https://www.google.com/maps/place/Plaza+Mafalda/@-34.5741,-58.4497,17z" },
-  { name: "Plaza Dr. Bernardo Houssay", link: "https://maps.app.goo.gl/NrKV5v9Y1mjJxKcx6" },
-  { name: "Plaza Rodríguez Peña", link: "https://maps.app.goo.gl/7oZvqUQ9kQJ8eT3y9" },
-  { name: "Plaza Libertad", link: "https://maps.app.goo.gl/G4qYpQvUJrLqAh7y9" }
+  { name: "Plaza General San Martín", link: "https://www.google.com/maps/place/Plaza+Gral.+San+Mart%C3%ADn/@-34.5905,-58.3729,17z" },
+  { name: "Floralis Genérica", link: "https://www.google.com/maps/place/Floralis+Gen%C3%A9rica/@-34.5858,-58.3934,17z" },
+  { name: "Plaza Rep. Fed. del Brasil", link: "https://www.google.com/maps/place/Plaza+Rep%C3%BAblica+Federativa+del+Brasil/@-34.5843,-58.3975,17z" },
+  { name: "El Rosedal Garden", link: "https://www.google.com/maps/place/El+Rosedal/@-34.5808,-58.4349,17z" },
+  { name: "Parque Centenario", link: "https://www.google.com/maps/place/Parque+Centenario/@-34.6019,-58.4128,17z" },
+  { name: "Los Andes Park", link: "https://www.google.com/maps/place/Parque+Los+Andes/@-34.5757,-58.4421,17z" },
+  { name: "Plaza Mafalda", link: "https://www.google.com/maps/place/Plaza+Mafalda/@-34.5667,-58.4555,17z" },
+  { name: "Plaza Dr. Bernardo Houssay", link: "https://www.google.com/maps/place/Plaza+Houssay/@-34.5945,-58.3817,17z" },
+  { name: "Plaza Rodríguez Peña", link: "https://www.google.com/maps/place/Plaza+Rodr%C3%ADguez+Pe%C3%B1a/@-34.5884,-58.3948,17z" },
+  { name: "Plaza Libertad", link: "https://www.google.com/maps/place/Plaza+Libertad/@-34.5918,-58.3689,17z" }
 ];
 
 const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart, guestNotes = [] }) => {
