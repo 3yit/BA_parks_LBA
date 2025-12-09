@@ -90,7 +90,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart, guestNotes = [] 
               rel="noopener noreferrer"
               className="block text-xs text-rose-500 mt-4 font-medium hover:underline"
             >
-              🙏 Please prof give us a 5
+              🙏 Link to our Canva presentation and rating
             </a>
             <p className="text-xs text-stone-400 mt-2 font-medium uppercase tracking-widest">
               Designed by: Rim, Mara and Jonathan for a CS164 assignment.
