@@ -1,11 +1,24 @@
 import React from 'react';
-import { Flower, Map as MapIcon, Music, BookOpen, MessageCircleHeart } from 'lucide-react';
+import { Flower, Route, MessageCircleHeart } from 'lucide-react';
 import { GuestNote } from '../App';
 
 interface WelcomeScreenProps {
   onStart: () => void;
   guestNotes?: GuestNote[];
 }
+
+const TOUR_STOPS = [
+  "Plaza General San Martín",
+  "Floralis Genérica",
+  "Plaza Rep. Fed. del Brasil",
+  "El Rosedal Garden",
+  "Parque Centenario",
+  "Los Andes Park",
+  "Plaza Mafalda",
+  "Plaza Dr. Bernardo Houssay",
+  "Plaza Rodríguez Peña",
+  "Plaza Libertad"
+];
 
 const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart, guestNotes = [] }) => {
   return (
@@ -32,10 +45,24 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart, guestNotes = [] 
         </div>
 
         <div className="glass-panel rounded-3xl p-8 shadow-xl border border-white/50 space-y-6">
-          <div className="grid grid-cols-3 gap-4">
-            <FeatureCard icon={<Music className="w-5 h-5 text-rose-600" />} label="Curated Vibes" />
-            <FeatureCard icon={<BookOpen className="w-5 h-5 text-amber-600" />} label="Local Stories" />
-            <FeatureCard icon={<MapIcon className="w-5 h-5 text-emerald-600" />} label="Easy Travel" />
+          {/* TSP Tour Order */}
+          <div className="text-left space-y-3">
+            <div className="flex items-center gap-2 justify-center mb-4">
+              <Route className="w-5 h-5 text-rose-500" />
+              <h3 className="font-serif font-bold text-stone-700 text-sm">
+                Optimal Tour Order (TSP Formulation)
+              </h3>
+            </div>
+            <ol className="space-y-1.5">
+              {TOUR_STOPS.map((stop, index) => (
+                <li key={index} className="flex items-center gap-3 text-sm">
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-rose-100 text-rose-600 font-bold text-xs flex items-center justify-center">
+                    {index + 1}
+                  </span>
+                  <span className="text-stone-600">{stop}</span>
+                </li>
+              ))}
+            </ol>
           </div>
 
           <div className="pt-4">
@@ -47,7 +74,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart, guestNotes = [] 
               <span className="group-hover:translate-x-1 transition-transform">→</span>
             </button>
             <p className="text-xs text-stone-400 mt-4 font-medium uppercase tracking-widest">
-              Designed by: Rim, Mara and Jonathan for a CS164 assignement.
+              Designed by: Rim, Mara and Jonathan for a CS164 assignment.
             </p>
           </div>
         </div>
@@ -73,12 +100,5 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart, guestNotes = [] 
     </div>
   );
 };
-
-const FeatureCard = ({ icon, label }: { icon: React.ReactNode; label: string }) => (
-  <div className="flex flex-col items-center justify-center p-3 rounded-2xl bg-white/50 border border-white/60 shadow-sm">
-    <div className="mb-2">{icon}</div>
-    <span className="text-xs font-semibold text-stone-600 text-center leading-tight">{label}</span>
-  </div>
-);
 
 export default WelcomeScreen;
