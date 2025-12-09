@@ -17,15 +17,17 @@ const CommuteScreen: React.FC<CommuteScreenProps> = ({ nextPark, commuteInfo, us
   };
 
   const mapsMode = getGoogleMapsMode(commuteInfo.method);
-  const originParam = userLocation ? `${userLocation.lat},${userLocation.lon}` : 'Current+Location';
+  // Always use empty origin to let Google Maps use current location
+  const originParam = '';
   const destinationParam = encodeURIComponent(`${nextPark.name}, Buenos Aires, Argentina`);
   
   // Use the API key provided in the original snippet, or fallback if needed.
   // Note: For production, this should be in an env var, but keeping it here as requested by prompt logic to fix *this* site.
   const API_KEY = 'AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8'; 
   
+  // For embed, show place if no user location, otherwise show directions
   const embedSrc = userLocation
-    ? `https://www.google.com/maps/embed/v1/directions?key=${API_KEY}&origin=${originParam}&destination=${destinationParam}&mode=${mapsMode}`
+    ? `https://www.google.com/maps/embed/v1/directions?key=${API_KEY}&origin=${userLocation.lat},${userLocation.lon}&destination=${destinationParam}&mode=${mapsMode}`
     : `https://www.google.com/maps/embed/v1/place?key=${API_KEY}&q=${destinationParam}`;
 
   const getTransportIcon = (method: string) => {
@@ -69,7 +71,7 @@ const CommuteScreen: React.FC<CommuteScreenProps> = ({ nextPark, commuteInfo, us
           </div>
           <div className="p-4 bg-white">
             <a
-              href={`https://www.google.com/maps/dir/?api=1&origin=${originParam}&destination=${destinationParam}&travelmode=${mapsMode}`}
+              href={`https://www.google.com/maps/dir/?api=1&destination=${destinationParam}&travelmode=${mapsMode}`}
               target="_blank"
               rel="noreferrer"
               className="flex items-center justify-center gap-2 w-full bg-blue-600 text-white font-medium py-3 rounded-xl hover:bg-blue-700 transition-colors"
