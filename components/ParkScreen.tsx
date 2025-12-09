@@ -36,8 +36,14 @@ const ParkScreen: React.FC<ParkScreenProps> = ({
   park, stopNumber, totalStops, photos, onAddPhoto, onAddComment, onNext, onPrev, hasPrev, hasNext 
 }) => {
   const [showGallery, setShowGallery] = useState(false);
+  const [selectedPhotoId, setSelectedPhotoId] = useState<string | number | null>(null);
   const [embeddedContent, setEmbeddedContent] = useState<EmbeddedContent | null>(null);
   const placeholderImage = `https://picsum.photos/seed/${park.id}/800/600`;
+
+  const handlePhotoClick = (photoId: string | number) => {
+    setSelectedPhotoId(photoId);
+    setShowGallery(true);
+  };
 
   // Construct Google Maps Search Query
   const googleMapsQuery = encodeURIComponent(`${park.name} ${park.neighborhood} Buenos Aires`);
@@ -242,7 +248,11 @@ const ParkScreen: React.FC<ParkScreenProps> = ({
             
             <div className="grid grid-cols-3 gap-2">
                 {photos.slice(0, 2).map((photo) => (
-                    <div key={photo.id} className="aspect-square rounded-xl overflow-hidden relative">
+                    <div 
+                        key={photo.id} 
+                        className="aspect-square rounded-xl overflow-hidden relative cursor-pointer hover:opacity-90 transition-opacity"
+                        onClick={() => handlePhotoClick(photo.id)}
+                    >
                          <img src={photo.url} alt="Memory" className="w-full h-full object-cover" />
                     </div>
                 ))}
@@ -287,9 +297,13 @@ const ParkScreen: React.FC<ParkScreenProps> = ({
       {showGallery && (
         <PhotoGallery 
             photos={photos} 
-            onClose={() => setShowGallery(false)} 
+            onClose={() => {
+              setShowGallery(false);
+              setSelectedPhotoId(null);
+            }} 
             onAddPhoto={onAddPhoto}
             onAddComment={onAddComment}
+            initialSelectedPhotoId={selectedPhotoId}
         />
       )}
 

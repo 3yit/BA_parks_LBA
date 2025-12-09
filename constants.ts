@@ -117,7 +117,7 @@ export const PARKS: Park[] = [
   },
   { id: 7, name: 'Los Andes Park', neighborhood: 'Chacarita', lat: -34.5757, lon: -58.4421,
     description: 'A recently revitalized urban oasis in Chacarita showcasing Buenos Aires\' commitment to modern urban green space design.',
-    vibes: '👗 Vintage Fashion | 💀 Dark Tourism',
+    vibes: '👗 Vintage Fashion | 💀 Funky music',
     bestTime: 'Sat/Sun (11am-3pm)',
     funFacts: [
       'Instagram-famous vintage markets',

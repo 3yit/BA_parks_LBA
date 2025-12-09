@@ -7,13 +7,16 @@ interface PhotoGalleryProps {
   onClose: () => void;
   onAddPhoto: (file: File, name: string, caption: string) => void;
   onAddComment: (photoId: string | number, author: string, text: string) => void;
+  initialSelectedPhotoId?: string | number | null;
 }
 
-const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos, onClose, onAddPhoto, onAddComment }) => {
+const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos, onClose, onAddPhoto, onAddComment, initialSelectedPhotoId }) => {
   const [photographerName, setPhotographerName] = useState('');
   const [caption, setCaption] = useState('');
   const [isUploading, setIsUploading] = useState(false);
-  const [expandedPhoto, setExpandedPhoto] = useState<Photo | null>(null);
+  const [expandedPhoto, setExpandedPhoto] = useState<Photo | null>(
+    initialSelectedPhotoId ? photos.find(p => p.id === initialSelectedPhotoId) || null : null
+  );
   const [commentAuthor, setCommentAuthor] = useState('');
   const [commentText, setCommentText] = useState('');
 
