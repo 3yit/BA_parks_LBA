@@ -8,16 +8,16 @@ interface WelcomeScreenProps {
 }
 
 const TOUR_STOPS = [
-  { name: "Plaza General San Martín", link: "https://maps.app.goo.gl/yq9K7qrLSHvxx1CA9" },
-  { name: "Floralis Genérica", link: "https://maps.app.goo.gl/hEH7JqH4mHUk9cxWA" },
-  { name: "Plaza Rep. Fed. del Brasil", link: "https://maps.app.goo.gl/iAGYCBi15UCFUx2BA" },
-  { name: "El Rosedal Garden", link: "https://maps.app.goo.gl/icrRowxN6M3UA68s6" },
-  { name: "Parque Centenario", link: "https://maps.app.goo.gl/P2s4hRrFoJeXSLHw7" },
-  { name: "Los Andes Park", link: "https://maps.app.goo.gl/MF2r8LdmuzVpRm6i6" },
-  { name: "Plaza Mafalda", link: "https://maps.app.goo.gl/C6TxLr26xVXeouXc8" },
-  { name: "Plaza Dr. Bernardo Houssay", link: "https://maps.app.goo.gl/kcr6pPpXgCSWThzF9" },
-  { name: "Plaza Rodríguez Peña", link: "https://maps.app.goo.gl/CfqmAuEUC3JpG9KDA" },
-  { name: "Plaza Libertad", link: "https://maps.app.goo.gl/tLt3aDGiqwEYsM3c6" }
+  { name: "Plaza General San Martín", link: "https://maps.app.goo.gl/tLt3aDGiqwEYsM3c6" },
+  { name: "Floralis Genérica", link: "https://maps.app.goo.gl/C6TxLr26xVXeouXc8" },
+  { name: "Plaza Rep. Fed. del Brasil", link: "https://maps.app.goo.gl/CfqmAuEUC3JpG9KDA" },
+  { name: "El Rosedal Garden", link: "https://maps.app.goo.gl/hEH7JqH4mHUk9cxWA" },
+  { name: "Parque Centenario", link: "https://maps.app.goo.gl/icrRowxN6M3UA68s6" },
+  { name: "Los Andes Park", link: "https://maps.app.goo.gl/P2s4hRrFoJeXSLHw7" },
+  { name: "Plaza Mafalda", link: "https://maps.app.goo.gl/iAGYCBi15UCFUx2BA" },
+  { name: "Plaza Dr. Bernardo Houssay", link: "https://maps.app.goo.gl/MF2r8LdmuzVpRm6i6" },
+  { name: "Plaza Rodríguez Peña", link: "https://maps.app.goo.gl/kcr6pPpXgCSWThzF9" },
+  { name: "Plaza Libertad", link: "https://maps.app.goo.gl/yq9K7qrLSHvxx1CA9" }
 ];
 
 const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart, guestNotes = [] }) => {
