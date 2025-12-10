@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flower, Clock, MapPin, MessageCircleHeart } from 'lucide-react';
+import { Flower, Clock, MapPin, MessageCircleHeart, Star } from 'lucide-react';
 import { GuestNote } from '../App';
 
 interface WelcomeScreenProps {
@@ -106,8 +106,16 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart, guestNotes = [] 
               Notes from Previous Visitors
             </h3>
             <div className="space-y-3 max-h-96 overflow-y-auto">
-              {guestNotes.map((note) => (
+              {[...guestNotes].sort((a, b) => b.id - a.id).map((note) => (
                 <div key={note.id} className="bg-white/60 backdrop-blur-sm p-4 rounded-2xl border border-white shadow-sm text-sm">
+                  <div className="flex items-center gap-0.5 mb-2">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Star
+                        key={star}
+                        className={`w-4 h-4 ${star <= (note.rating || 5) ? 'text-amber-400 fill-amber-400' : 'text-stone-300'}`}
+                      />
+                    ))}
+                  </div>
                   <p className="text-stone-700 italic mb-2">"{note.text}"</p>
                   <p className="text-rose-500 text-xs font-bold text-right">- {note.author}, {note.timestamp}</p>
                 </div>
